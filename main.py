@@ -49,6 +49,7 @@ def main():
             resp = e.response
             limit_reset = resp.headers.get('x-rate-limit-reset', 'UNKNOWN')
             print(f'rate limit exceeded: resets in {limit_reset} seconds')
+            return
 
     print('lyrics upload failed after 3 retries')
 
