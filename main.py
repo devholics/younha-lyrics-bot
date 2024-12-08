@@ -45,6 +45,10 @@ def main():
         except tweepy.errors.BadRequest as e:
             print('lyrics upload fail (bad request)')
             trials -= 1
+        except tweepy.errors.TooManyRequests as e:
+            resp = e.response
+            limit_reset = resp.headers.get('x-rate-limit-reset', 'UNKNOWN')
+            print(f'rate limit exceeded: resets in {limit_reset} seconds')
 
     print('lyrics upload failed after 3 retries')
 
